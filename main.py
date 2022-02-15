@@ -61,7 +61,7 @@ def affichage():
     print("====== RESOLUTION DE SUTOM =======")
     longueur = int(input("Entrer la longueur du mot :"))
     print("Entrer la liste des lettres")
-    print("(sous forme : PR999T \n ) mettre un 9 pour les lettres inconnues")
+    print("(sous forme : PR***T) mettre un * pour les lettres inconnues")
     lettres_ordonnes = input("Entrer lettres : ")
     print("=====")
     lettres_desordonnes = input("Entrer maintenant les lettres dont la position est inconnue \n forme : ABC ")
@@ -75,7 +75,6 @@ def main():
     mots = liste_mots("./dico.txt")
     print("VOICI LES MOTS TROUVES : ")
     print(trouver_mot(lettres_ordonnes,mots,lettres_desordonnes,not_here))
-    # print(trouver_mot("F9999E",mots,"LI"))
     
 
 
