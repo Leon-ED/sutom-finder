@@ -10,6 +10,7 @@ def nettoyer_mot(mot,caracteres_interdits):
 
 
 def nettoyer_dico(lien,longueur):
+    '''Ecrit dans le fichier dico.txt les mots etant uniquement de la longueur entrée par l'utilisateur'''
     with open(lien,"r") as fichier:
         with open("./dico.txt","w") as dico:
             for lignes in fichier:
@@ -81,5 +82,14 @@ def main(donnes):
 
 
 if __name__ == "__main__":
-    donnes = int(sys.argv[1]),str(sys.argv[2]),str(sys.argv[3]),str(sys.argv[4])
+    try:
+        donnes = int(sys.argv[1]),str(sys.argv[2]),str(sys.argv[3]),str(sys.argv[4])
+    except IndexError :
+        print("Attention arguments manquants ! :")
+        print("Passage en mode manuel ")
+        donnes = affichage()
+    except ValueError:
+        print("Attention erreur dans les arguments ! :")
+        print("Passage en mode manuel ")
+        donnes = affichage()
     main(donnes)
