@@ -1,3 +1,5 @@
+import sys
+
 
 def nettoyer_mot(mot,caracteres_interdits):
     new_mot = ""
@@ -69,8 +71,8 @@ def affichage():
 
     return lettres_ordonnes,lettres_desordonnes,longueur,not_here
 
-def main():
-    lettres_ordonnes, lettres_desordonnes,longueur,not_here = affichage()
+def main(donnes):
+    longueur, lettres_ordonnes,lettres_desordonnes,not_here = donnes
     nettoyer_dico("./mot.txt",longueur)
     mots = liste_mots("./dico.txt")
     print("VOICI LES MOTS TROUVES : ")
@@ -79,4 +81,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    donnes = int(sys.argv[1]),str(sys.argv[2]),str(sys.argv[3]),str(sys.argv[4])
+    main(donnes)
