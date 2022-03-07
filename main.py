@@ -1,3 +1,6 @@
+# !/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 import sys
 
 
@@ -47,6 +50,8 @@ def trouver_mot(lettres_ordonnes,dico,lettres=[],not_here=[]):
                 coup += 1
 
         for lettre in lettres:
+            if lettre == "*":
+                coup += 1
             if lettre.lower() in mots:
                 coup += 1
 
@@ -60,28 +65,51 @@ def trouver_mot(lettres_ordonnes,dico,lettres=[],not_here=[]):
     return mots_potentiels
 
 
+
 def affichage():
+    longueur = 0
     print("====== RESOLUTION DE SUTOM =======")
-    longueur = int(input("Entrer la longueur du mot :"))
+
+    while True:
+        try:
+            longueur = int(input("Entrer la longueur du mot :"))
+            break
+        except ValueError:
+            print("Réessayer en entrant un entier comme valeur !")
+        
     print("Entrer la liste des lettres")
     print("(sous forme : PR***T) mettre un * pour les lettres inconnues")
-    lettres_ordonnes = input("Entrer lettres : ")
+
+    lettres_ordonnes = str(input("Entrer lettres : "))
     print("=====")
-    lettres_desordonnes = input("Entrer maintenant les lettres dont la position est inconnue \n forme : ABC ")
-    not_here = input("Entrer les lettres qui ne sont pas dans le mot : ")
+    lettres_desordonnes = str(input("Entrer maintenant les lettres dont la position est inconnue \n forme : ABC "))
+    not_here = str(input("Entrer les lettres qui ne sont pas dans le mot : "))
 
     return lettres_ordonnes,lettres_desordonnes,longueur,not_here
+
+
+
 
 def main(donnes):
     longueur, lettres_ordonnes,lettres_desordonnes,not_here = donnes
     nettoyer_dico("./mot.txt",longueur)
     mots = liste_mots("./dico.txt")
-    print("VOICI LES MOTS TROUVES : ")
-    print(trouver_mot(lettres_ordonnes,mots,lettres_desordonnes,not_here))
+
+    listeResultat = trouver_mot(lettres_ordonnes,mots,lettres_desordonnes,not_here)
+    print("\n=========== SUTOM Helper ==============")
+    if listeResultat == []:
+
+        print("Aucun mot trouvé ! Vérifier les informations entrées")
+    else:
+        print(f"Résultat {len(listeResultat)} mots ont été trouvés")
+        print(trouver_mot(lettres_ordonnes,mots,lettres_desordonnes,not_here))
+        print("Si la liste est longue réessayer en entrant plus d'informations")
+
     
 
 
 if __name__ == "__main__":
+
     try:
         donnes = int(sys.argv[1]),str(sys.argv[2]),str(sys.argv[3]),str(sys.argv[4])
     except IndexError :
